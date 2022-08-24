@@ -2,24 +2,18 @@ package com.springproject.model;
 
 import java.util.List;
 
-public class ProductResponse {
-
-    private final String id;
+public class ProductCreateRequest {
     private final String name;
     private final String description;
     private final Integer priceInCent;
     private final List<String> tags;
 
-    public ProductResponse(String id, String name, String description, Integer priceInCent, List<String> tags) {
-        this.id = id;
+    public ProductCreateRequest(String name, String description, Integer priceInCent, List<String> tags) {
+
         this.name = name;
         this.description = description;
         this.priceInCent = priceInCent;
         this.tags = tags;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {

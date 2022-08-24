@@ -1,30 +1,33 @@
 package com.springproject.repository;
 
+import com.springproject.model.ProductCreateRequest;
 import com.springproject.model.ProductResponse;
+import org.springframework.http.ResponseEntity;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductRepository {
+    List<ProductResponse> products;
+    public ProductRepository() {
+        products = new ArrayList<>();
+        products.add(new ProductResponse(
+                "1",
+                "AMD Ryzen 9 5950X",
+                "Graphic card",
+                79900,
+                Arrays.asList("AMD", "Processor")
+                ));
+        products.add(new ProductResponse(
+                "2",
+                "Intel Core i9-9900KF",
+                "Graphic card",
+                37900,
+                Arrays.asList("Intel", "Processor")
+        ));
+    }
 
     public List<ProductResponse> findAll(String tag) {
-        List<ProductResponse> products = Arrays.asList(
-                new ProductResponse(
-                        "1",
-                        "AMD Ryzen 9 5950X",
-                        "Graphic card",
-                        79900,
-                        Arrays.asList("AMD", "Processor")),
-                new ProductResponse(
-                        "2",
-                        "Intel Core i9-9900KF",
-                        "Graphic card",
-                        37900,
-                        Arrays.asList("Intel", "Processor")
-                )
-        );
-
         if (tag == null)
             return products;
 
@@ -39,5 +42,31 @@ public class ProductRepository {
                         .collect(Collectors.toList())
                         .contains(tag.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+    public Optional<ProductResponse> findByID(String id) {
+        Optional<ProductResponse> product = products.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst();
+
+        return product;
+    }
+
+    public void deleteByID(String id) {
+        this.products = products.stream()
+                .dropWhile(p -> p.getId().equals(id))
+                .collect(Collectors.toList());
+    }
+
+    public ProductResponse save(ProductCreateRequest request) {
+        ProductResponse response = new ProductResponse(
+                UUID.randomUUID().toString(),
+                request.getName(),
+                request.getDescription(),
+                request.getPriceInCent(),
+                request.getTags()
+        );
+        products.add(response);
+        return response;
     }
 }
