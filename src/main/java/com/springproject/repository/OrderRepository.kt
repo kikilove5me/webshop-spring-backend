@@ -3,9 +3,11 @@ package com.springproject.repository
 import com.springproject.model.OrderCreateRequest
 import com.springproject.model.OrderResponse
 import com.springproject.model.OrderStatus
+import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.UUID
 
+@Service
 class OrderRepository {
     val orders = mutableListOf<OrderResponse>();
     fun save(request: OrderCreateRequest): OrderResponse {

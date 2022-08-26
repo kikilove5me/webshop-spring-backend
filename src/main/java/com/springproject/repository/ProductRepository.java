@@ -3,14 +3,14 @@ package com.springproject.repository;
 import com.springproject.model.ProductCreateRequest;
 import com.springproject.model.ProductResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+@Service
 public class ProductRepository {
-    List<ProductResponse> products;
+    List<ProductResponse> products = new ArrayList<>();
     public ProductRepository() {
-        products = new ArrayList<>();
         products.add(new ProductResponse(
                 "1",
                 "AMD Ryzen 9 5950X",

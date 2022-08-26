@@ -8,15 +8,16 @@ import com.springproject.repository.CustomerRepository
 import com.springproject.repository.OrderPositionRepository
 import com.springproject.repository.OrderRepository
 import com.springproject.repository.ProductRepository
+import org.springframework.stereotype.Service
 import java.util.*
 
-class OrderService {
-
-
-    private val orderRepository = OrderRepository()
-    private val customerRepository = CustomerRepository()
-    private val orderPositionRep = OrderPositionRepository()
-    private val productRepository = ProductRepository()
+@Service
+class OrderService(
+        val productRepository: ProductRepository,
+        val orderRepository: OrderRepository,
+        val customerRepository: CustomerRepository,
+        val orderPositionRep : OrderPositionRepository
+) {
 
     fun createOrder(request: OrderCreateRequest): OrderResponse {
         if (checkCustomer(request.customerId))

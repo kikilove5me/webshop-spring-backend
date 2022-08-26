@@ -12,8 +12,12 @@ import java.util.Optional;
 
 @RestController
 public class ProductController {
+    private final ProductRepository productRepository;
+    public ProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
-    ProductRepository productRepository = new ProductRepository();
+
 
     @GetMapping("/products")
     public List<ProductResponse> getAllProducts(@RequestParam(required = false) String tag) {

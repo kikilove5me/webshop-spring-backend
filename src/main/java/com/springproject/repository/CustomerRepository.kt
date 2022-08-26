@@ -1,8 +1,10 @@
 package com.springproject.repository
 
 import com.springproject.model.CustomerResponse
+import org.springframework.stereotype.Service
 import java.util.*
 
+@Service
 class CustomerRepository {
     val customers = listOf(
             CustomerResponse(
