@@ -15,6 +15,7 @@ class ApiExceptionHandler {
         println(exception)
         val (code, message) = when (exception) {
             is WebshopException -> exception.statusCode to exception.message
+            is IdNotFoundException -> HttpStatus.BAD_REQUEST to exception.message
             else -> HttpStatus.INTERNAL_SERVER_ERROR to (exception.message ?: "An error occured")
         }
 
