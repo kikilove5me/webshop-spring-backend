@@ -1,5 +1,6 @@
 package com.springproject.service
 
+import com.springproject.exceptions.WebshopException
 import com.springproject.model.OrderCreateRequest
 import com.springproject.model.OrderPositionCreateRequest
 import com.springproject.model.OrderPositionResponse
@@ -8,6 +9,7 @@ import com.springproject.repository.CustomerRepository
 import com.springproject.repository.OrderPositionRepository
 import com.springproject.repository.OrderRepository
 import com.springproject.repository.ProductRepository
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -21,7 +23,7 @@ class OrderService(
 
     fun createOrder(request: OrderCreateRequest): OrderResponse {
         if (checkCustomer(request.customerId))
-            throw Exception("Customer not found")
+            throw WebshopException(message = "Customer not found", statusCode = HttpStatus.BAD_REQUEST)
 
         return orderRepository.save(request)
     }
@@ -34,9 +36,9 @@ class OrderService(
 
     fun createNewPositionForOrder(orderId: String, request: OrderPositionCreateRequest): OrderPositionResponse {
         if (orderRepository.findByID(orderId) == null)
-            throw Exception("Order not found")
+            throw WebshopException(message = "Order: $orderId not found", statusCode = HttpStatus.BAD_REQUEST)
         if (productRepository.findByID(request.productId).isEmpty)
-            throw Exception("Product not found")
+            throw WebshopException(message = "Product ${request.productId} not found", statusCode = HttpStatus.BAD_REQUEST)
 
         val orderPositionResponse = OrderPositionResponse(
                 id = UUID.randomUUID().toString(),
