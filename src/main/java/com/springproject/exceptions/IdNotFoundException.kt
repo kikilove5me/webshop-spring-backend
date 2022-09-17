@@ -4,6 +4,6 @@ import org.springframework.http.HttpStatus
 
 data class IdNotFoundException(
     override val message: String,
-    val statusCode: HttpStatus
-): Exception(message){
+    val statusCode: HttpStatus = HttpStatus.BAD_REQUEST
+): RuntimeException(message){
 }

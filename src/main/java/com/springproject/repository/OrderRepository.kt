@@ -9,7 +9,7 @@ import java.util.UUID
 
 @Service
 class OrderRepository {
-    val orders = mutableListOf<OrderResponse>();
+    private val orders = mutableListOf<OrderResponse>();
     fun save(request: OrderCreateRequest): OrderResponse {
         val orderResponse = OrderResponse(
                 id = UUID.randomUUID().toString(),
@@ -24,6 +24,10 @@ class OrderRepository {
 
     fun findByID(orderId: String): OrderResponse? {
         return orders.find { it.id == orderId }
+    }
+
+    fun findAllByCustomerIdWhereOrderStatusIsNew(customerId: String): List<OrderResponse> {
+        return orders.filter { it.customerId == customerId && it.status == OrderStatus.NEW}
     }
 
 }
