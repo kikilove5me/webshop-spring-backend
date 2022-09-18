@@ -5,10 +5,10 @@ import java.util.List;
 public class ProductCreateRequest {
     private final String name;
     private final String description;
-    private final Integer priceInCent;
+    private final long priceInCent;
     private final List<String> tags;
 
-    public ProductCreateRequest(String name, String description, Integer priceInCent, List<String> tags) {
+    public ProductCreateRequest(String name, String description, long priceInCent, List<String> tags) {
 
         this.name = name;
         this.description = description;
@@ -24,7 +24,7 @@ public class ProductCreateRequest {
         return description;
     }
 
-    public Integer getPriceInCent() {
+    public long getPriceInCent() {
         return priceInCent;
     }
 

@@ -7,10 +7,10 @@ public class ProductResponse {
     private final String id;
     private final String name;
     private final String description;
-    private final Integer priceInCent;
+    private final long priceInCent;
     private final List<String> tags;
 
-    public ProductResponse(String id, String name, String description, Integer priceInCent, List<String> tags) {
+    public ProductResponse(String id, String name, String description, long priceInCent, List<String> tags) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -30,7 +30,7 @@ public class ProductResponse {
         return description;
     }
 
-    public Integer getPriceInCent() {
+    public long getPriceInCent() {
         return priceInCent;
     }
 
