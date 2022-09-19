@@ -16,12 +16,17 @@ class CustomerController(
 
     @GetMapping("/customers/{id}")
     fun getCustomerById(@PathVariable id: String): CustomerResponse {
-        return customerRepository.findById(id)
+        val customer = customerRepository.getReferenceById(id)
+        return CustomerResponse(
+            id = customer.id,
+            firstName = customer.firstName,
+            lastName= customer.lastName,
+            email = customer.email)
     }
 
     @GetMapping("/customers")
     fun getAllCustomers(): List<CustomerResponse> {
-        return customerRepository.getAll()
+        return customerRepository.findAll().map { it -> CustomerResponse(it.id, it.firstName, it.lastName, it.email) };
     }
 
     @GetMapping("/customer/{id}/shoppingcard")

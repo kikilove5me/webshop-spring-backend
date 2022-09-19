@@ -1,18 +1,9 @@
 package com.springproject.repository
 
-import com.springproject.model.OrderPositionResponse
-import org.springframework.stereotype.Service
+import com.springproject.entity.OrderPositionEntity
+import org.springframework.data.jpa.repository.JpaRepository
 
-@Service
-class OrderPositionRepository {
+interface OrderPositionRepository: JpaRepository<OrderPositionEntity, String> {
 
-    private val orderPositions = mutableListOf<OrderPositionResponse>()
-
-    fun save(orderPositionResponse: OrderPositionResponse) {
-        orderPositions.add(orderPositionResponse);
-    }
-
-    fun findAllByOrderIds(orderIds: List<String>): List<OrderPositionResponse> {
-        return orderPositions.filter { orderIds.contains(it.orderId) }
-    }
 }
+

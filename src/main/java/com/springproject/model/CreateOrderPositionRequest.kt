@@ -1,8 +1,8 @@
 package com.springproject.model
 
-data class OrderPositionCreateRequest(
+data class CreateOrderPositionRequest(
         val productId: String,
-        val quantity: Long
+        val quantity: Int
 ){
 
 }

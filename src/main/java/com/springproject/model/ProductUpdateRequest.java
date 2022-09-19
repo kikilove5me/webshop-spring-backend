@@ -1,19 +1,14 @@
 package com.springproject.model;
 
-import java.util.List;
-
-public class ProductCreateRequest {
+public class ProductUpdateRequest {
     private final String name;
     private final String description;
-    private final long priceInCent;
-    private final List<String> tags;
+    private final Integer priceInCent;
 
-    public ProductCreateRequest(String name, String description, long priceInCent, List<String> tags) {
-
+    public ProductUpdateRequest(String name, String description, Integer priceInCent) {
         this.name = name;
         this.description = description;
         this.priceInCent = priceInCent;
-        this.tags = tags;
     }
 
     public String getName() {
@@ -24,11 +19,8 @@ public class ProductCreateRequest {
         return description;
     }
 
-    public long getPriceInCent() {
+    public Integer getPriceInCent() {
         return priceInCent;
     }
 
-    public List<String> getTags() {
-        return tags;
-    }
 }
