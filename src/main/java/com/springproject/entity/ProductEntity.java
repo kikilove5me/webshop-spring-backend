@@ -1,9 +1,6 @@
 package com.springproject.entity;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -14,6 +11,7 @@ public class ProductEntity {
     private String name;
     private String description;
     @ElementCollection
+    @CollectionTable(name="product_entity_tags", joinColumns = @JoinColumn(name="product_id"))
     private List<String> tags;
     private Integer priceInCent;
 
